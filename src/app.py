@@ -1,4 +1,4 @@
-###pip install streamlit langchain langchain-openai langchain_community beautifulsoup4 python-dotenv
+###pip install streamlit langchain langchain-openai langchain_community beautifulsoup4 python-dotenv cromadb 
 
 # Chat with website 
 import streamlit as st 
@@ -6,8 +6,9 @@ from langchain_core.messages import AIMessage, HumanMessage
 from langchain_community.document_loaders import WebBaseLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import chroma
-from langchain_openai import OpenAIEmbeddings
+from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from dotenv import  load_dotenv
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 
 load_dotenv()
 
@@ -32,6 +33,16 @@ def get_vectorstore_from_url(url):
     url_vector_store = chroma.from_documnts(document_chunk, OpenAIEmbeddings()) 
     
     return(url_vector_store)
+
+def get_context_retriever_chain(vector_stores):
+    llm = ChatOpenAI()
+    
+    retriever = vector_stores.as_retriever()
+
+    prompt = ChatPromptTemplate.from_messages([]
+        
+    )
+
 
 def put_on_chat_sidebar(sidetxt):
 #Chat Debug using sidebar
