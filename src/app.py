@@ -52,7 +52,7 @@ def get_context_retriever_chain(vector_stores):
     
     return retriever_chain
 
-def get_conversational_rag_Chain(retriever_chain):
+def get_conversational_rag_chain(retriever_chain):
     
     llm = ChatOpenAI()
     
@@ -73,7 +73,7 @@ def get_response(user_input):
     retriever_chain = get_context_retriever_chain(st.session_state.vector_store)
     
     #create conversation
-    conversational_rag_chain = get_conversational_rag_Chain(retriever_chain) 
+    conversational_rag_chain = get_conversational_rag_chain(retriever_chain) 
     
     response = conversational_rag_chain.invoke({
         "chat_history": st.session_state.chat_history,
